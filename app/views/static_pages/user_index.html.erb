@@ -1,0 +1,23 @@
+<h2>User Index </h2>
+<%= page_entries_info @users %>
+ <%= will_paginate @users, :renderer => BootstrapPagination::Rails %>
+<% @users.each do |user| %>
+<div class="row">
+  <div class="span2">
+     <%= user.first_name %> <%= user.last_name %>
+  </div>
+  <div class="span3">
+   <%= user.email %>
+ </div>
+ <div class="span3">
+ <% if current_user == user %>
+  <p> Current User </p>
+  <% elsif user.admin? %>
+     <%= button_to 'Remove Admin', static_pages_toggle_admin_path(id: user.id), class: "btn-mini btn-danger", method: "post" %>
+  <% else %>
+     <%= button_to 'Make Admin', static_pages_toggle_admin_path(id: user.id), class: "btn-mini btn-success", method: "post" %>
+  <% end %>
+  </div>
+</div>
+ 
+<% end %>

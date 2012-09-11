@@ -1,0 +1,43 @@
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div><%= f.label :email %>
+  <%= f.email_field :email %></div>
+
+  <div><%= f.label :password %> <p><i>(leave blank if you don't want to change it)</i><p>
+  <%= f.password_field :password, :autocomplete => "off" %></div>
+
+  <div><%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation %></div>
+
+  <%= f.label :first_name %>
+  <%= f.text_field :first_name%>
+
+  <%= f.label :last_name %>
+  <%= f.text_field :last_name%>
+
+  <%= f.label :license_number %>
+  <%= f.text_field :license_number %>
+
+  <%= f.label :state %>
+  <%= f.select :state, User::STATES%>
+
+  <%= f.label :specialty %>
+  <%= f.select :specialty, User::SPECIALTY%>
+
+  <p>Current Photo</p>
+  <% if current_user.photo? %>
+    <%= image_tag resource.photo.url(:thumb) %>
+  <% end %>
+
+  <%= f.file_field :photo %>
+
+  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+  <%= f.password_field :current_password %></div>
+
+  <div><%= f.submit "Update", class: "btn-success" %></div>
+<% end %>
+<%= link_to "Back", :back %>
+

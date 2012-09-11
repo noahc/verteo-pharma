@@ -1,0 +1,20 @@
+<script type="text/javascript" charset="utf-8">
+$(function () {
+  new Highcharts.Chart({
+    chart: { renderTo: 'product_chart' },
+    legend: {enabled: false},
+    title: { text: '30 Day Session Registrations By Product' },
+     tooltip: {
+     formatter: function() {
+        return '<b>'+ this.point.name +'</b>: '+ Math.round(this.percentage) +' %';
+     }
+  },
+     series: [{
+                type: 'pie',
+                name: 'Browser share',
+                data: <%= @product_count.to_json.html_safe %>
+            }]
+  });
+});
+</script>
+<div id="product_chart" style="min-width: 650px; height: 500px; margin: 0 auto"></div>

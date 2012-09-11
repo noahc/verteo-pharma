@@ -1,0 +1,35 @@
+<h2>New Session </h2>
+
+<%= form_for(@period)  do |f| %>
+  <% if @period.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@period.errors.count, "error") %> prohibited new products:</h2>
+      <ul>
+      <% @period.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.label :Name %>
+  <%= f.text_field :name%>
+
+  <%= f.label :Event %>
+  <%= collection_select(:period, :event_id, Event.all, :id, :name)%>
+
+  <%= f.label :Product %>
+  <%= collection_select(:period, :product_id, Product.all, :id, :name)%>
+  
+
+  <%= f.label "Start Time" %>
+  <%= f.text_field :start_time, class: "timepicker" %>
+    <%= f.label "End Time" %>
+  <%= f.text_field :end_time, class: "timepicker" %>
+
+   <%= f.label :description %>
+  <%= f.text_area :description, rows: 5, cols: 80%>
+  <br />
+
+  <%= f.submit "Create Session" %>
+
+<% end %>

@@ -1,0 +1,25 @@
+ <div class="span9">
+    <div class="hero-unit">
+      <h1>Welcome to Vetreo's Physician Portal</h1>
+       <p>We believe in the work you do everyday, and look forward to helping you provide the best care to your patients using our world class pharmacutical products</a></p>
+        <%= link_to "Get Started", new_user_registration_path, class: "btn btn-primary btn-large" %>
+    </div>
+    <div class="row-fluid">
+      <div class="span4">
+        <h2>Up Coming Events</h2>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+         <%= link_to "Find Events Near You", events_path, class: "btn btn-primary btn-large" %>
+      </div><!--/span-->
+      <div class="span4">
+        <h2>Medical Inquiries</h2>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <%= link_to "Contact Us", new_inquery_path, class: "btn btn-primary btn-large" %>
+      </div><!--/span-->
+      <div class="span4">
+        <h2>Product Samples</h2>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <%= link_to "Request Samples", products_path, class: "btn btn-primary btn-large" %>
+      </div><!--/span-->
+    </div><!--/row-->
+  </div><!--/span-->
+</div><!--/row-->

@@ -1,0 +1,21 @@
+
+<script type="text/javascript" charset="utf-8">
+$(function () {
+  new Highcharts.Chart({
+    chart: { renderTo: 'product_request_product' },
+    legend: {enabled: false},
+    title: { text: '30 Day Product Requests by Product' },
+     tooltip: {
+     formatter: function() {
+        return '<b>'+ this.point.name +'</b>: '+ Math.round(this.percentage) +' %';
+     }
+  },
+     series: [{
+                type: 'pie',
+                name: 'Browser share',
+                data: <%= @product_request_product_count.to_json.html_safe %> 
+            }]
+  });
+});
+</script>
+<div id="product_request_product" style="min-width: 650px; height: 500px; margin: 0 auto"></div>

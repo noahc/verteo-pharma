@@ -1,0 +1,38 @@
+<h2>Product Request</h2>
+<h3>Current Requests</h3>
+<% @cart.cart_rows.each do |item| %> 
+  <li><%= item.quantity %>&times; <b><%= item.product.name %></b> 
+  <%= link_to "Remove", cart_row_path(item), method: "delete", :data => { :confirm => "Are you sure?" }%> 
+<% end %>
+<hr />
+<h3>Shipping Address</h3>
+<%= form_for(@product_request)  do |f| %>
+
+  <% if @product_request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product_request.errors.count, "error") %> prohibited this post from being saved:</h2>
+<ul>
+  <% @product_request.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+  </div>
+<% end %>
+
+  <%= f.label :Street %>
+  <%= f.text_field :street%>
+
+  <%= f.label :City %>
+  <%= f.text_field :city%>
+
+  <%= f.label :state %>
+  <%= f.select :state, Inquery::STATES%>
+
+  <%= f.label :Zip_Code %>
+  <%= f.text_field :zip%>
+
+  <br />
+
+  <%= f.submit "Submit Request", class: "btn-success" %>
+
+<% end %>

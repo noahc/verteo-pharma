@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Verteo</title>
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <%= link_to "Verteo", root_path, class: "brand" %>
+        </div>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+        <div class="well sidebar-nav">
+          <ul class="nav nav-list">
+
+            <% if controller.controller_name == "products" && !current_user.admin? %>
+              <li class="nav-header">Current Samples</li>
+              <% @cart.cart_rows.each do |item| %> 
+                <li><%= item.quantity %>&times; <b><%= item.product.name %></b> 
+                <%= link_to "Remove", cart_row_path(item), method: "delete" %> 
+              <% end %>
+              
+      
+           <p> <%= link_to "Submit Request", new_product_request_path, class: "btn-small btn-success" %> <p>
+              <hr />
+            <% end %>
+
+
+            <% if user_signed_in? %>
+              <li class="nav-header"><% if current_user.photo? %>
+                 <%= image_tag current_user.photo.url(:mini) %>   Signed In    
+              <% end %></li>
+           
+              <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+              <li><%= link_to "Profile", profile_path %></li>
+              <li><%= link_to "Change User Settings", edit_user_registration_path %></li>
+            <% else %>
+              <li class="nav-header">Sign In / Register </li>
+              <%= link_to "Sign up", new_user_registration_path %> or 
+              <%= link_to "Sign in", new_user_session_path %>
+            <% end %>
+               <hr />
+            <li class="nav-header">Navigation</li>
+            <li><%= link_to "Up Coming Events", events_path %></li>
+            <li><%= link_to "Medical Product Inquiries", new_inquery_path %></li>
+            <li><%= link_to 'Product Sampling', products_path %><li>
+               <hr />
+            <% if user_signed_in? && current_user.admin? %>
+              <li class="nav-header">Events and Sessions Admin</li>
+              <li><%= link_to 'New Event', new_event_path %></li>
+              <li><%= link_to 'New Session', new_period_path %></li>
+              <li><%= link_to 'Manage Events', events_path %></li>
+              <li class="nav-header">Products Admin</li>
+              <li><%= link_to 'New Product', new_product_path %></li>
+              <li><%= link_to 'Manage Products', products_path %></li>
+              <li><%= link_to 'Product Requests', product_requests_path %></li>
+              <li class="nav-header">Inquiries Admin</li>
+              <li><%= link_to 'Manage Medical Inquiries', inqueries_path %></li>
+              <li class="nav-header">Website Admin</li>
+              <li><%= link_to 'Manage Admins',  list_path %></li>
+              <li><%= link_to 'Analytics',    analytics_path %></li>
+            <%end %>
+          </ul>
+        </div><!--/.well -->
+      </div><!--/span-->
+      <div class="span9">
+       <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, class: "alert alert-#{key}") %> 
+    <% end %>
+               
+        <%= yield %>
+         
+      </div>
+  </div><!--/.fluid-container-->
+</body>
+<%= debug(params) if Rails.env.development? %>
+</html>

@@ -1,0 +1,13 @@
+<h2>Events List</h2>
+
+<% @events.each do |event| %>
+  <h3><%= link_to event.name, event_path(event) %> </h3>
+  
+    <% if user_signed_in? && current_user.admin?  %>
+    <p><%= link_to "Edit Event", edit_event_path(event) %> | <%= link_to "Delete Event", event, method: "delete", :data => { :confirm => "Are you sure?"} %></p> 
+  <% end %>
+
+  <h5><%= event.date.strftime("%b %e, %Y") %> </h5>
+  <h5><%= event.city%>, <%= event.state%> </h5>
+  <br />
+<% end %>

@@ -1,0 +1,21 @@
+<h2>Product Samples</h2>
+ <% @products.each do |product| %>
+  
+   <div class="row">
+   <% if !current_user.admin? %>
+    <div class="span1">
+      <%= button_to 'Request Sample', cart_rows_path(product_id: product.id), class: "btn-mini" %>
+    </div>
+    <% end %>
+    <div class="span5">
+      <h5><%= product.name %> 
+        <% if user_signed_in? && current_user.admin? %> 
+          <%= link_to "Edit Product", edit_product_path(product) %> | 
+          <%= link_to "Delete Product", product, method: "delete", :data => { :confirm =>  "Are you sure?" }%>
+        <% end %>
+      </h5>
+      <p><%= raw product.description %></p>
+      <hr />
+    </div>
+  </div> 
+<% end %>

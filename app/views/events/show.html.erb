@@ -1,0 +1,43 @@
+<h2><%= @event.name %></h2>
+<h5><%= @event.date.strftime("%b %e, %Y") %> </h5>
+<h5><%= @event.street%> </h5>
+<h5><%= @event.city%>, <%= @event.state%> </h5>
+
+<br />
+
+<h3>Sessions List</h3>
+
+<% if !user_signed_in? %>
+  <p>Please <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "Sign in", new_user_session_path %> To Register for a Session<p>
+<% end %>
+
+<% @periods.each do | period | %>
+<div class="span6">
+    <p><b><%= period.name %></b> @ 
+  <%= period.start_time.strftime("%l:%M") %> - <%= period.end_time.strftime("%l:%M %P") %> 
+
+  <% if user_signed_in? && current_user.admin? %>
+      <br />
+         <%= link_to "Edit", edit_period_path(period) %> | 
+         <%= link_to "Delete", period, method: "delete", :data => { :confirm => "Are you sure?"} %> | 
+         <%= link_to "View Registered", period_path(period) %> | Registered: 
+         <b><%= PeriodRegistration.find_all_by_period_id(period).count %></b>
+  <% end %>
+
+  <p><%= period.description %></p>
+  <% if user_signed_in?  %>
+
+    <% if PeriodRegistration.find_by_period_id_and_user_id(period, current_user) %>
+      <%= link_to "Unregister For Session",period_registration_path(PeriodRegistration.find_by_period_id_and_user_id(period, current_user)), method: "delete", 
+                                        :data => { :confirm => "Are you sure?"}, class: "btn btn-danger btn-small" %>
+    <% else %>
+    <%= link_to "Register for Session", save_period_period_registration_path(period_registration: {user_id: current_user.id, period_id: period.id}), 
+        :method => :post, controller: "registrations", class: "btn btn-success btn-small" %>
+    <% end %>
+  <% end %>
+  <hr />
+</div>
+
+<% end %>
+
+

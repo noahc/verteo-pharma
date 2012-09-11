@@ -1,0 +1,31 @@
+<%= form_for(@product_request)  do |f| %>
+  <% if @product_request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product_request.errors.count, "error") %> prohibited new products:</h2>
+      <ul>
+      <% @product_request.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.label :Street %>
+  <%= f.text_field :street%>
+
+  <%= f.label :City %>
+  <%= f.text_field :city%>
+
+  <%= f.label :state %>
+  <%= f.select :state, Inquery::STATES%>
+
+  <%= f.label :Zip_Code %>
+  <%= f.text_field :zip%>
+
+  <%= f.label :status %>
+  <%= f.select :status, ProductRequest::STATUS%>
+
+  <br />
+
+  <%= f.submit "Submit Request", class: "btn-success" %>
+
+<% end %>

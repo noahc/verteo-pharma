@@ -1,0 +1,17 @@
+<h2>Sessions List</h2>
+<% @periods.each do |period| %>
+<p>
+  <b>
+    <%= link_to period.name, period %>
+  </b> 
+    @ <%= period.start_time.strftime("%l:%M") %> 
+    
+    - <%= period.end_time.strftime("%l:%M %P") %>
+</p>
+ <h6><%= period.event.name %> in <%= period.event.city %>, <%= period.event.state%></h6>
+  <%= period.description %>
+  <% if user_signed_in? && current_user.admin?  %> 
+    <p><%= link_to "Edit Session", edit_period_path(period) %> | <%= link_to "Delete Session", period, method: "delete", data: {:confirm => "Are you sure?" }%></p>
+  <% end %>
+<hr />
+<% end %>

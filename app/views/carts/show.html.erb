@@ -1,0 +1,17 @@
+<h2>Thank You</h2>
+<br />
+
+<h4>All Products Will Be Mailed To the Following Address:</h4>
+<br />
+<h6><%= @product_requests.first.user.first_name %> <%= @product_requests.first.user.last_name %></h6>
+    <h6><%= @product_requests.first.street %></h6>
+    <h6><%= @product_requests.first.city %>, <%= @product_requests.first.state %> <%= @product_requests.first.zip %></h6
+
+<h4>You've requested the following:</h4>
+<% @product_requests.each do |product_request| %>
+  <h6><%= product_request.quantity %>&times; <b><%= product_request.product.name %></h6>
+<% end %>
+<hr />
+
+<p>We will fill your order as soon as possible, in the mean time you can view the status of your order
+on your <%= link_to "Profile Page", profile_path %></p>

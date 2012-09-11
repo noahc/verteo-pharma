@@ -1,0 +1,27 @@
+<script type="text/javascript" charset="utf-8">
+$(function () {
+  new Highcharts.Chart({
+    chart: { renderTo: 'inquery_chart' },
+    legend: {enabled: false},
+    title: { text: '30 Day Product Inquiries' },
+    xAxis: { type: 'datetime' },
+    yAxis: {
+      title: { text: 'Product Inquiries' },
+      allowDecimals: false,
+      min: 0
+    },
+    tooltip: {
+
+      formatter: function () {
+        return Highcharts.dateFormat("%B %e %Y", this.x) + ': ' + Highcharts.numberFormat(this.y, 0);
+      }
+    },    
+    series: [{
+      pointInterval: <%= 1.day * 1000 %>,
+      pointStart: <%= 30.days.ago.at_midnight.to_i * 1000 %>,
+      data: <%= @inquery_count.reverse.to_json %>
+    }]
+  });
+});
+</script>
+<div id="inquery_chart" ></div>

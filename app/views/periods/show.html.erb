@@ -1,0 +1,29 @@
+<h2><%= @period.name %></h2>
+<div class="row">
+  <div class="span5">
+<h4>Event Info</h4>
+<h6>Event: <%= @period.event.name %></h6>
+<h6>Time: <%= @period.start_time.strftime("%l:%M") %> - <%= @period.end_time.strftime("%l:%M") %></h6>
+<h6><%= @period.event.city %>, <%= @period.event.state %></h6>
+<br />
+<h4>Description</h4>
+
+<p><%= @period.description %></p>
+  </div>
+  <div class="span5">
+    <h4>Registered Users</h4>
+    <br />
+    <%  @registered.each do |register| %>
+  <p><%= register.user.first_name %> <%= register.user.last_name %> - <%= register.user.email %></p>
+<% end %>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+

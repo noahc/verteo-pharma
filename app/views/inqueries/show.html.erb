@@ -1,0 +1,32 @@
+<% if current_user.admin? %>
+<h2>Inquery</h2>
+<div class="row">
+  <div class="offset1">
+    <div class="span3 offset1">
+  <h4>Name: <%= @inquery.user.first_name %> <%= @inquery.user.last_name %></h4>
+  <h5>Product: <%= @inquery.product.name %></h5>
+  <h5>Preffered Method: <%= @inquery.perfered_method %></h5>
+  <h5>Phone: <%= @inquery.phone %></h5>
+  <h5>Email: <%= mail_to @inquery.user.email, @inquery.user.email %></h5>
+  <h6>Address:</h6>
+  <h5><%= @inquery.street %></h5>
+  <h5><%= @inquery.city %>,  <%= @inquery.state %> <%= @inquery.zip %> </h5>
+  </div>
+
+  </div>
+
+  <div class="span5">
+    <h4>Message:</h4>
+    <p><%= @inquery.message %></p>
+  </div>
+
+</div>
+
+<% else %>
+<h2>Thank you</h2>
+
+<p>We've received your inquiry and will respond via <%= @inquery.perfered_method %></p>
+
+<h6>Below is the text of your Inquiry for your own records</h6>
+<%= @inquery.message %>
+<% end %>

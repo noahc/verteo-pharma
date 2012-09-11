@@ -1,0 +1,20 @@
+<script type="text/javascript" charset="utf-8">
+$(function () {
+  new Highcharts.Chart({
+    chart: { renderTo: 'inquery_product' },
+    legend: {enabled: false},
+    title: { text: '30 Day Product Inquiries by Product' },
+     tooltip: {
+     formatter: function() {
+        return '<b>'+ this.point.name +'</b>: '+ Math.round(this.percentage) +' %';
+     }
+  },
+     series: [{
+                type: 'pie',
+                name: 'Browser share',
+                data: <%= @inquery_product_count.to_json.html_safe %> 
+            }]
+  });
+});
+</script>
+<div id="inquery_product" style="min-width: 650px; height: 500px; margin: 0 auto"></div>

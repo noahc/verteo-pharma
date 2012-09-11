@@ -1,0 +1,26 @@
+<h2>Edit Product</h2>
+<%= form_for(@product)  do |f| %>
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited new products:</h2>
+      <ul>
+      <% @product.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.label :Name %>
+  <%= f.text_field :name%>
+
+  <%= f.label :Stock_Count %>
+  <%= f.text_field :stock %>
+
+  <%= f.label :Order_Limit %>
+  <%= f.text_field :limit %>
+
+  <%= f.label :Description %>
+  <%= f.text_area :description, rows: 5, cols: 80%>
+<br />
+<%= f.submit "Create Product" %>
+<% end %>

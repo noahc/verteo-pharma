@@ -1,0 +1,26 @@
+<h2>Product Requests</h2>
+ <%= page_entries_info @product_requests %>
+ <%= will_paginate @product_requests, :renderer => BootstrapPagination::Rails %>
+<% @product_requests.each do |product_request| %>
+  <h5>Order Number: <%= product_request.id %></h5>
+  <div class="row offset1">
+    <div class="span3">
+     <h6>Product: <%= product_request.product.name %></h6>
+     <h6>Date: <%= time_ago_in_words(product_request.created_at) %> ago</h6>
+    <h6>Status: <%= product_request.status %></h6>
+    <h6>Quantity: <%= product_request.quantity %></h6>
+     
+    </div>
+    <div class="span4">
+      <h5>Address:</h5>
+      <h6><%= product_request.user.first_name %> <%= product_request.user.last_name %> </h6>
+      <h6><%= product_request.street%></h6>
+      <h6><%= product_request.city%>, <%= product_request.state%> <%= product_request.zip%></h6>
+    </div>
+    <div class="span3">
+      <p><%= link_to "Edit", edit_product_request_path(product_request) %></p>
+      <p><%= link_to "Delete", product_request, method: "delete", :data => { :confirm => "Are you sure?" } %></p>
+    </div>
+  </div>
+  <hr />
+<% end %>

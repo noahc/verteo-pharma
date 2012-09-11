@@ -1,0 +1,25 @@
+<h2>Inquiry List</h2>
+<% @inqueries.each do |inquery| %>
+  <div class="row">
+    <div class="span3">
+      <p><%= inquery.user.first_name %> <%= inquery.user.last_name %></p>
+      <h6> <%= inquery.product.name %></h6>
+      <% if inquery.perfered_method == "Email" %>
+       <p><%= mail_to inquery.user.email, inquery.user.email %></p>
+      <% elsif inquery.perfered_method == "Phone"%>
+      <%= inquery.phone %>
+      <% elsif inquery.perfered_method == "Postal Address" %>
+      <p><%= inquery.street %></p>
+      <p><%= inquery.city %>, <%= inquery.state %> <%= inquery.zip%></p>
+      <% end %>
+      <p><%= link_to "Delete Inquiry", inquery, method: "delete", :data => { :confirm => "Are you sure?" }%></p>
+      <p><%= link_to "View Inquiry", inquery %></p>
+
+    </div>
+    <div class="span5">
+      <h6>Message:</h6>
+      <%= inquery.message %>
+    </div>
+  </div>
+  <hr />
+<% end %>
